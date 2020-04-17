@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.teligen.demo.mapper.TCarCompanyMapper">
+  <resultMap id="BaseResultMap" type="com.teligen.demo.model.TCarCompany">
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="REFCHECKCARKEYID" jdbcType="VARCHAR" property="refcheckcarkeyid" />
+    <result column="NAME" jdbcType="VARCHAR" property="name" />
+    <result column="IDENTITYCARD" jdbcType="VARCHAR" property="identitycard" />
+    <result column="REMARK" jdbcType="VARCHAR" property="remark" />
+    <result column="SEX" jdbcType="DECIMAL" property="sex" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, REFCHECKCARKEYID, NAME, IDENTITYCARD, REMARK, SEX
+  </sql>
+  <insert id="insertSelective" parameterType="com.teligen.demo.model.TCarCompany">
+    insert into T_CAR_COMPANY
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="refcheckcarkeyid != null">
+        REFCHECKCARKEYID,
+      </if>
+      <if test="name != null">
+        NAME,
+      </if>
+      <if test="identitycard != null">
+        IDENTITYCARD,
+      </if>
+      <if test="remark != null">
+        REMARK,
+      </if>
+      <if test="sex != null">
+        SEX,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="refcheckcarkeyid != null">
+        #{refcheckcarkeyid,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="identitycard != null">
+        #{identitycard,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.teligen.demo.model.TCarCompany">
+    update T_CAR_COMPANY
+    <set>
+      <if test="refcheckcarkeyid != null">
+        REFCHECKCARKEYID = #{refcheckcarkeyid,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="identitycard != null">
+        IDENTITYCARD = #{identitycard,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        SEX = #{sex,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <resultMap id="BaseResultMap" type="com.teligen.sample.business.model.common.TCarCompany">
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="REFCHECKCARKEYID" jdbcType="VARCHAR" property="refcheckcarkeyid" />
+    <result column="NAME" jdbcType="VARCHAR" property="name" />
+    <result column="IDENTITYCARD" jdbcType="VARCHAR" property="identitycard" />
+    <result column="REMARK" jdbcType="VARCHAR" property="remark" />
+    <result column="SEX" jdbcType="DECIMAL" property="sex" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ID, REFCHECKCARKEYID, NAME, IDENTITYCARD, REMARK, SEX
+  </sql>
+  <insert id="insertSelective" parameterType="com.teligen.sample.business.model.common.TCarCompany">
+    insert into T_CAR_COMPANY
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        ID,
+      </if>
+      <if test="refcheckcarkeyid != null">
+        REFCHECKCARKEYID,
+      </if>
+      <if test="name != null">
+        NAME,
+      </if>
+      <if test="identitycard != null">
+        IDENTITYCARD,
+      </if>
+      <if test="remark != null">
+        REMARK,
+      </if>
+      <if test="sex != null">
+        SEX,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="refcheckcarkeyid != null">
+        #{refcheckcarkeyid,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="identitycard != null">
+        #{identitycard,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.teligen.sample.business.model.common.TCarCompany">
+    update T_CAR_COMPANY
+    <set>
+      <if test="refcheckcarkeyid != null">
+        REFCHECKCARKEYID = #{refcheckcarkeyid,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="identitycard != null">
+        IDENTITYCARD = #{identitycard,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        SEX = #{sex,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

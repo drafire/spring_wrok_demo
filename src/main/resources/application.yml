@@ -1,0 +1,15 @@
+spring:
+  profiles:
+    active: pro
+  mvc:
+    dispatch-options-request: true
+mybatis:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+server:
+  tomcat:
+    port-header: HEAD,PUT,DELETE,OPTIONS,TRACE,COPY,SEARCH,PROPFIND
+
+
+tomcat_max_file_size: 300MB
+tomcat_max_request_size: 500MB

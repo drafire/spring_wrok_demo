@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.teligen.sample.business.mapper.MoatMapper" >
+  <resultMap id="BaseResultMap" type="com.teligen.sample.business.model.common.Moat" >
+    <id column="KEYID" property="keyid" jdbcType="VARCHAR" />
+    <result column="STARTTIME" property="starttime" jdbcType="TIMESTAMP" />
+    <result column="ENDTIME" property="endtime" jdbcType="TIMESTAMP" />
+    <result column="LXBH" property="lxbh" jdbcType="VARCHAR" />
+    <result column="LXMC" property="lxmc" jdbcType="VARCHAR" />
+    <result column="QUERY_PEOPLE" property="queryPeople" jdbcType="VARCHAR" />
+    <result column="QUERY_CAR" property="queryCar" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    KEYID, STARTTIME, ENDTIME, LXBH, LXMC, QUERY_PEOPLE, QUERY_CAR
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from T_MOAT
+    where KEYID = #{keyid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from T_MOAT
+    where KEYID = #{keyid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.teligen.sample.business.model.common.Moat" >
+    insert into T_MOAT (KEYID, STARTTIME, ENDTIME, 
+      LXBH, LXMC, QUERY_PEOPLE, 
+      QUERY_CAR)
+    values (#{keyid,jdbcType=VARCHAR}, #{starttime,jdbcType=TIMESTAMP}, #{endtime,jdbcType=TIMESTAMP}, 
+      #{lxbh,jdbcType=VARCHAR}, #{lxmc,jdbcType=VARCHAR}, #{queryPeople,jdbcType=VARCHAR}, 
+      #{queryCar,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.teligen.sample.business.model.common.Moat" >
+    insert into T_MOAT
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="keyid != null" >
+        KEYID,
+      </if>
+      <if test="starttime != null" >
+        STARTTIME,
+      </if>
+      <if test="endtime != null" >
+        ENDTIME,
+      </if>
+      <if test="lxbh != null" >
+        LXBH,
+      </if>
+      <if test="lxmc != null" >
+        LXMC,
+      </if>
+      <if test="queryPeople != null" >
+        QUERY_PEOPLE,
+      </if>
+      <if test="queryCar != null" >
+        QUERY_CAR,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="keyid != null" >
+        #{keyid,jdbcType=VARCHAR},
+      </if>
+      <if test="starttime != null" >
+        #{starttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endtime != null" >
+        #{endtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lxbh != null" >
+        #{lxbh,jdbcType=VARCHAR},
+      </if>
+      <if test="lxmc != null" >
+        #{lxmc,jdbcType=VARCHAR},
+      </if>
+      <if test="queryPeople != null" >
+        #{queryPeople,jdbcType=VARCHAR},
+      </if>
+      <if test="queryCar != null" >
+        #{queryCar,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.teligen.sample.business.model.common.Moat" >
+    update T_MOAT
+    <set >
+      <if test="starttime != null" >
+        STARTTIME = #{starttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endtime != null" >
+        ENDTIME = #{endtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lxbh != null" >
+        LXBH = #{lxbh,jdbcType=VARCHAR},
+      </if>
+      <if test="lxmc != null" >
+        LXMC = #{lxmc,jdbcType=VARCHAR},
+      </if>
+      <if test="queryPeople != null" >
+        QUERY_PEOPLE = #{queryPeople,jdbcType=VARCHAR},
+      </if>
+      <if test="queryCar != null" >
+        QUERY_CAR = #{queryCar,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where KEYID = #{keyid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.teligen.sample.business.model.common.Moat" >
+    update T_MOAT
+    set STARTTIME = #{starttime,jdbcType=TIMESTAMP},
+      ENDTIME = #{endtime,jdbcType=TIMESTAMP},
+      LXBH = #{lxbh,jdbcType=VARCHAR},
+      LXMC = #{lxmc,jdbcType=VARCHAR},
+      QUERY_PEOPLE = #{queryPeople,jdbcType=VARCHAR},
+      QUERY_CAR = #{queryCar,jdbcType=VARCHAR}
+    where KEYID = #{keyid,jdbcType=VARCHAR}
+  </update>
+</mapper>
