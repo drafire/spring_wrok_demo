@@ -8,9 +8,9 @@ db:
   datasource:
     dbmain:
       driverClassName: oracle.jdbc.OracleDriver
-      url: jdbc:oracle:thin:@192.168.0.101:1521:orcl
-      username: sim
-      password: sim
+      url: jdbc:oracle:thin:@192.168.1.1:1234:aaa
+      username: aaa
+      password: aaa
       type: com.alibaba.druid.pool.DruidDataSource
       initialSize: 15
       minIdle: 10
@@ -32,9 +32,9 @@ db:
       useGlobalDataSourceStat: true
     dbhouse:
       driverClassName: oracle.jdbc.OracleDriver
-      url: jdbc:oracle:thin:@192.168.0.101:1521:orcl
-      username: sim
-      password: sim
+      url: jdbc:oracle:thin:@192.168.1.1:1234:aaa
+      username: aaa
+      password: aaa
       type: com.alibaba.druid.pool.DruidDataSource
       initialSize: 5
       minIdle: 5
