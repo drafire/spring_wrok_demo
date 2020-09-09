@@ -8,9 +8,9 @@ db:
   datasource:
     dbmain:
       driverClassName: oracle.jdbc.OracleDriver
-      url: jdbc:oracle:thin:@192.168.1.105:1521:nhga2
-      username: sim
-      password: nhga_Teligen201605
+      url: jdbc:oracle:thin:@192.168.1.1:1234:aaa
+      username: aaa
+      password: aaa
       type: com.alibaba.druid.pool.DruidDataSource
       initialSize: 15
       minIdle: 10
@@ -32,9 +32,9 @@ db:
       useGlobalDataSourceStat: true
     dbhouse:
       driverClassName: oracle.jdbc.OracleDriver
-      url: jdbc:oracle:thin:@68.113.8.185:1521:orcl
-      username: sim
-      password: sim_2019
+      url: jdbc:oracle:thin:@192.168.1.1:1234:aaa
+      username: aa
+      password: aaa
       type: com.alibaba.druid.pool.DruidDataSource
       initialSize: 5
       minIdle: 5
@@ -58,11 +58,11 @@ db:
 spring:
   redis:
     # Redis服务器地址
-    host: 192.168.1.104
+    host: 192.168.1.1234
     # Redis服务器连接端口 （默认为6379）
     port: 6379
     # Redis服务器连接密码（默认为空）
-    password: fsjw@Teligen201804
+    password: aaa
       # Redis数据库索引（默认为0)
     database: 0
     # 连接超时时间（毫秒）
