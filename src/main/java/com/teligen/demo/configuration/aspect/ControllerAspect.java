@@ -118,18 +118,12 @@ public class ControllerAspect {
         if(result == null || !(result instanceof Map)){
             logInfo.append("非常规WEB请求,执行结束,耗时：：" + clock.getTime() + "ms\n");
         } else {
-            logInfo.append("执行结束，返回结果：");
-            Map<String,Object> returnResult = (Map<String, Object>)result;
-            if(returnResult.containsKey("result")){
-                logInfo.append("result=" + CommonUtils.safeToString(returnResult.get("result")) + ";");
-            }
-            if(returnResult.containsKey("errorCode")){
-                logInfo.append("errorCode=" + CommonUtils.safeToString(returnResult.get("errorCode")) + ";");
-            }
-            if(returnResult.containsKey("errorMsg")){
-                logInfo.append("errorMsg=" + CommonUtils.safeToString(returnResult.get("errorMsg")) + ";\n");
-            }
-            logInfo.append("WEB请求执行结束,耗时：" + clock.getTime() + "ms");
+            logInfo.append("执行结束，返回结果：");            
+            String finalResult = JSON.toJSONString(result);
+            //截取字符串，防止打印日志过长
+            finalResult = finalResult.length() > 2000 ? finalResult.substring(0, 2000) : finalResult;
+            logInfo.append("执行结束，返回结果：" + JSON.toJSONString(finalResult) + "\n");
+            logInfo.append("WEB请求执行结束,耗时：" + clock.getTotalTimeMillis() + "ms");
         }
         long costTime = clock.getTime();
         //logInfo.append("请求时长: " + String.format("%.2f", costTime/1000f) + "s\n");
