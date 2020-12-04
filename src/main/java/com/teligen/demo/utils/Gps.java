@@ -57,13 +57,13 @@ public class Gps {
 
     public static Gps changeToStandard(String longitude, String latitude, String gpsType) {
         Gps gps = null;
-        if (PositionUtils.APP_GPS_TYPE == 2) {
-            gps = PositionUtils.bd09_To_Gps84(longitude, latitude, gpsType);
-        } else {
-            gps = PositionUtils.gcj_To_Gps84(CommonUtils.safeToDouble(latitude, 0), CommonUtils.safeToDouble(longitude, 0));
-            gps.setLongitude(CommonUtils.safeToString(gps.getWgLon()));
-            gps.setLatitude(CommonUtils.safeToString(gps.getWgLat()));
-        }
+//        if (PositionUtils.APP_GPS_TYPE == 2) {
+//            gps = PositionUtils.bd09_To_Gps84(longitude, latitude, gpsType);
+//        } else {
+//            gps = PositionUtils.gcj_To_Gps84(CommonUtils.safeToDouble(latitude, 0), CommonUtils.safeToDouble(longitude, 0));
+//            gps.setLongitude(StrUtil.emptyIfNull(gps.getWgLon()));
+//            gps.setLatitude(StrUtil.emptyIfNull(gps.getWgLat()));
+//        }
         return gps;
     }
 }

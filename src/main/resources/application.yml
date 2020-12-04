@@ -9,6 +9,8 @@ mybatis:
 server:
   tomcat:
     port-header: HEAD,PUT,DELETE,OPTIONS,TRACE,COPY,SEARCH,PROPFIND
+  port: 8085
+
 
 
 tomcat_max_file_size: 300MB

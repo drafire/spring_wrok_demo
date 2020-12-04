@@ -1,4 +1,4 @@
-package com.teligen.sample.business.interceptor;
+package com.teligen.demo.configuration.interceptor;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

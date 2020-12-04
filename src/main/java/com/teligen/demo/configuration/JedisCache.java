@@ -17,14 +17,10 @@ public class JedisCache {
     private static StringRedisSerializer keySerializer;
     private static JdkSerializationRedisSerializer valueSerializer;
 
-    public final static String APP_JW_POLICE_USER_KEY_PREFIX = "user_jw_police_";
-    public final static String APP_POLICE_USER_TOKEN_KEY_PREFIX = "app_police_user_token_prefix_";
-    public final static String APP_POLICE_USER_TOKEN_TO_USRID_KEY_PREFIX = "app_police_user_token_to_usrid_prefix_";
-    public final static String APP_JW_POLICE_DEPT_KEY_PREFIX = "dept_jw_police_";
-
+    public final static String JSESSIONID_PREFIX = "aaaa-";
     public final static long KEY_EXPIRE_TIME = 3 * 60 * 1000;
 
-    public Jedis getJedis(){
+    public Jedis getJedis() {
         keySerializer = new StringRedisSerializer();
         valueSerializer = new JdkSerializationRedisSerializer();
         return jedisConfig.redisPoolFactory().getResource();

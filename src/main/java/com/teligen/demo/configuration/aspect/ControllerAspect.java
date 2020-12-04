@@ -1,8 +1,10 @@
 package com.teligen.demo.configuration.aspect;
 
+import cn.hutool.core.date.StopWatch;
+import cn.hutool.core.util.StrUtil;
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.teligen.demo.utils.CommonUtils;
-import org.apache.commons.lang3.time.StopWatch;
+import com.teligen.demo.exception.BusinessException;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.slf4j.Logger;
@@ -14,6 +16,7 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.ConstraintViolationException;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -30,14 +33,14 @@ public class ControllerAspect {
 
     /**
      * 对controller下的包均进行拦截处理
-     * **/
+     **/
     @Pointcut("execution(* com.teligen.demo.controller..*.*(..))")
-    public void postController(){
+    public void postController() {
 
     }
 
     @Before("postController()")
-    public void beforePost(){
+    public void beforePost() {
         //请求前
     }
 
@@ -47,7 +50,7 @@ public class ControllerAspect {
     }
 
     @Around("postController()")
-    public Object aroundPost(ProceedingJoinPoint pjd){
+    public Object aroundPost(ProceedingJoinPoint pjd) throws BusinessException {
         StopWatch clock = new StopWatch();
         clock.start();
 
@@ -98,7 +101,7 @@ public class ControllerAspect {
         /******** 获取请求数据  **********/
 
         Object result = null;
-        if(!"".equals(CommonUtils.safeToString(url))){
+        if (!"".equals(StrUtil.emptyIfNull(url))) {
             try {
                 result = pjd.proceed();
             } catch (Throwable throwable) {
@@ -111,27 +114,28 @@ public class ControllerAspect {
                 responseMap.put("message", "服务处理异常");
                 result = responseMap.toJSONString();
                 logger.info(logInfo.toString());
+
+                if (throwable instanceof BusinessException) {
+                    throw (BusinessException) throwable;
+                }
+                if(throwable instanceof ConstraintViolationException){  //这里要抛出异常，BusinessExceptionHandler才能捕获
+                    throw (ConstraintViolationException)throwable;
+                }
                 return result;
             }
         }
         clock.stop();
-        if(result == null || !(result instanceof Map)){
-            logInfo.append("非常规WEB请求,执行结束,耗时：：" + clock.getTime() + "ms\n");
+        if (result == null || !(result instanceof Map)) {
+            logInfo.append("非常规WEB请求,执行结束,耗时：：" + clock.getTotalTimeMillis() + "ms\n");
         } else {
             logInfo.append("执行结束，返回结果：");
-            Map<String,Object> returnResult = (Map<String, Object>)result;
-            if(returnResult.containsKey("result")){
-                logInfo.append("result=" + CommonUtils.safeToString(returnResult.get("result")) + ";");
-            }
-            if(returnResult.containsKey("errorCode")){
-                logInfo.append("errorCode=" + CommonUtils.safeToString(returnResult.get("errorCode")) + ";");
-            }
-            if(returnResult.containsKey("errorMsg")){
-                logInfo.append("errorMsg=" + CommonUtils.safeToString(returnResult.get("errorMsg")) + ";\n");
-            }
-            logInfo.append("WEB请求执行结束,耗时：" + clock.getTime() + "ms");
+            String finalResult = JSON.toJSONString(result);
+            //截取字符串，防止打印日志过长
+            finalResult = finalResult.length() > 2000 ? finalResult.substring(0, 2000) : finalResult;
+            logInfo.append("执行结束，返回结果：" + JSON.toJSONString(finalResult) + "\n");
+            logInfo.append("WEB请求执行结束,耗时：" + clock.getTotalTimeMillis() + "ms");
         }
-        long costTime = clock.getTime();
+        long costTime = clock.getTotalTimeMillis();
         //logInfo.append("请求时长: " + String.format("%.2f", costTime/1000f) + "s\n");
         logInfo.append("请求时长: " + costTime + "(ms)\n");
         logger.info(logInfo.toString());

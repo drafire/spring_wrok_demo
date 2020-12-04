@@ -1,6 +1,6 @@
 package com.teligen.demo.utils;
 
-import org.codehaus.xfire.util.Base64;
+import cn.hutool.core.codec.Base64;
 
 import javax.crypto.Cipher;
 import javax.crypto.SecretKey;

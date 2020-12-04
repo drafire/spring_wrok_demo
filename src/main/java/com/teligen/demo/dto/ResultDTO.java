@@ -1,7 +1,5 @@
 package com.teligen.demo.dto;
 
-import com.teligen.demo.utils.CommonUtils;
-
 public class ResultDTO<T> {
     private boolean result;
     private int code;
@@ -133,7 +131,7 @@ public class ResultDTO<T> {
         sb.append(",\"code\":")
                 .append(code);
         sb.append(",\"msg\":\"")
-                .append(CommonUtils.isNullorEmpty(msg) ? "" : msg).append("\"");
+                .append(msg).append('\"');
         sb.append(",\"totalNumber\":")
                 .append(totalNumber);
         sb.append(",\"data\":")

@@ -1,6 +1,7 @@
 package com.teligen.demo.configuration;
 
-import org.apache.commons.lang3.StringUtils;
+
+import cn.hutool.core.util.StrUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
@@ -49,7 +50,7 @@ public class EncodingRequestWrapper extends HttpServletRequestWrapper {
             String newValue = null;
             for (Map.Entry<String, String[]> entry : paramMap.entrySet()) {
                 String[] value = entry.getValue();
-                if (StringUtils.isNotEmpty(value[0])) {
+                if (StrUtil.isNotEmpty(value[0])) {
                     try {
                         newValue = new String(value[0].getBytes("ISO-8859-1"), charset);
                     } catch (UnsupportedEncodingException e) {
