@@ -31,11 +31,13 @@ public class BusinessExceptionHandler {
      * 处理自定义异常
      */
     @ExceptionHandler(BusinessException.class)
+    @ResponseStatus(HttpStatus.OK)
     public ResultDTO handleRRException(BusinessException e) {
         return ResultDTO.fail(e.getCode(), e.getMessage());
     }
 
     @ExceptionHandler(DuplicateKeyException.class)
+    @ResponseStatus(HttpStatus.OK)
     public ResultDTO handleDuplicateKeyException(DuplicateKeyException e) {
         logger.error(e.getMessage(), e);
         return ResultDTO.fail("数据库中已存在该记录");
@@ -43,6 +45,7 @@ public class BusinessExceptionHandler {
 
     //缺失参数校验
     @ExceptionHandler(MissingServletRequestParameterException.class)
+    @ResponseStatus(HttpStatus.OK)
     public ResultDTO missingParamException(MissingServletRequestParameterException e) {
         logger.error(e.getMessage(), e);
         return ResultDTO.fail("参数" + e.getParameterName() + "(" + e.getParameterType() + ")缺失");
@@ -50,6 +53,7 @@ public class BusinessExceptionHandler {
 
     //非object参数类型校验
     @ExceptionHandler(ConstraintViolationException.class)
+    @ResponseStatus(HttpStatus.OK)
     public ResultDTO constraintViolationException(ConstraintViolationException e) {
         logger.error(e.getMessage(), e);
         Set<ConstraintViolation<?>> constraintViolationsSet = e.getConstraintViolations();
@@ -65,6 +69,7 @@ public class BusinessExceptionHandler {
     }
 
     @ExceptionHandler(Exception.class)
+    @ResponseStatus(HttpStatus.OK)
     public ResultDTO handleException(Exception e) {
         if (e instanceof HttpMessageNotReadableException) {
             logger.error(e.getMessage(), e);
@@ -75,12 +80,12 @@ public class BusinessExceptionHandler {
         }
 
         logger.error(e.getMessage(), e);
-        return ResultDTO.fail();
+        return ResultDTO.fail(ResultCode.SYSTEM_EXCEPTION.getCode(),ResultCode.SYSTEM_EXCEPTION.getDes());
     }
 
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseStatus(HttpStatus.OK)  //这里设置response的status
     public ResultDTO validationError(MethodArgumentNotValidException ex) {
         FieldError fieldError = ex.getBindingResult().getFieldError();
         logger.error(fieldError.getField() + fieldError.getDefaultMessage());

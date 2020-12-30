@@ -11,6 +11,7 @@ public enum ResultCode {
     TOKEN_EXPIRE(-98, "token已过期"),
     METHOD_NOT_SUPPORT(-101,"方法不支持"),
     PARAM_ERROR(-102,"参数错误"),
+    DATA_NOT_EXIST(-103, "数据不存在"),
     NODATA(0, "没有数据");
     private int code;
     private String des;
