@@ -9,9 +9,11 @@ public enum ResultCode {
     SYSTEM_EXCEPTION(-99, "系统异常"),
     EMPTY_TOKEN(-100, "token为空"),
     TOKEN_EXPIRE(-98, "token已过期"),
-    METHOD_NOT_SUPPORT(-101,"方法不支持"),
-    PARAM_ERROR(-102,"参数错误"),
+    METHOD_NOT_SUPPORT(-101, "方法不支持"),
+    PARAM_ERROR(-102, "参数错误"),
     DATA_NOT_EXIST(-103, "数据不存在"),
+    ENUM_CODE_NOT_EXIST(-104, "枚举值不存在"),
+    NOT_ENUM(-105, "不是枚举值类型"),
     NODATA(0, "没有数据");
     private int code;
     private String des;
