@@ -1,0 +1,9 @@
+package com.teligen.demo
+import com.teligen.demo.model.People
+dialect "java"
+
+rule "man"
+when $p: People(getAge()<18&& getSex()==1)
+then
+ System.out.printf("未成年男人");
+ end
